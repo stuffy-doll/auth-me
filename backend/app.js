@@ -13,3 +13,27 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
+
+// Security Middleware
+if (!isProduction) {
+  // Enable CORS only in development
+  app.use(cors());
+};
+
+// Helmet helps set a variety of headers to better secure the app
+app.use(
+  helmet.crossOriginResourcePolicy({
+    policy: 'cross-origin'
+  })
+);
+
+// Set the _csrf token and create req.csrfToken method
+app.use(
+  csurf({
+    cookie: {
+      secure: isProduction,
+      sameSite: isProduction && 'Lax',
+      httpOnly: true
+    }
+  })
+);
