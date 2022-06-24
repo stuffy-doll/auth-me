@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 
@@ -9,7 +9,7 @@ function ProfileButton({ user }) {
   const handleMenu = () => {
     console.log('opening menu', showMenu);
     if (!showMenu) {
-      setShowMenu(true)
+      setShowMenu(true);
     } else {
       setShowMenu(false);
     };
